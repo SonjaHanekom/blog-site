@@ -4,6 +4,7 @@ import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
 import { skeleton, contentPath } from '@skeletonlabs/skeleton/plugin';
 import * as themes from '@skeletonlabs/skeleton/themes';
+import myCustomTheme from './theme-custom';
 
 export default {
   content: [
@@ -17,7 +18,7 @@ export default {
   plugins: [
     typography, forms, containerQueries,
     skeleton({
-      themes: [ themes.cerberus, themes.rose ]
+      themes: [ themes.cerberus, themes.rose, myCustomTheme ]
     })
   ]
 } satisfies Config;
