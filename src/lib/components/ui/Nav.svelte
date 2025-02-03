@@ -8,7 +8,7 @@
 >
 	<Button href="/"><House /></Button>
 	<Button href="/blog"><Rss /></Button>
-	<Button href="/tools"><PencilRuler /></Button>
-	<Button href="/about-me"><User /></Button>
-	<Button href="/search"><Search /></Button>
+	<Button href="/"><PencilRuler /></Button>
+	<Button href="/"><Search /></Button>
+	<Button href="/"><User /></Button>
 </div>
