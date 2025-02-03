@@ -17,5 +17,5 @@
 <div class="flex flex-col gap-4">
 	<Button href="/">Hi</Button>
 
-	<Button href="/ahhh">Hi<Skull />Hi</Button>
+	<!-- <Button href="/ahhh">Hi<Skull />Hi</Button> -->
 </div>
