@@ -1,6 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&family=Special+Elite&display=swap');
 
 .interactive {
 	box-shadow: 4px 6px rgba(var(--color-surface-950));
@@ -24,4 +25,14 @@ body {
 			linear-gradient(to right, var(--grid-color) var(--grid-strength), transparent var(--grid-strength)),
 			linear-gradient(to right, transparent var(--grid-gap), var(--paper-color) var(--grid-gap)),
 			linear-gradient(to bottom, var(--grid-color) var(--grid-strength), transparent var(--grid-strength));
+	font-family: "Special Elite", serif;
+	font-weight: 400;
+	font-style: normal;
 }
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Carter One", serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
