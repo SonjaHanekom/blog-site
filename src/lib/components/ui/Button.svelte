@@ -4,10 +4,13 @@
 
 	interface Props {
 		children: Snippet;
-		href: string;
+		href?: string;
+		onclick?: () => void;
 		variant?: 'round' | 'square';
+		provider?: 'link' | 'button';
+		[key: string]: any; // Allow any other props
 	}
-	let { children, href, variant = 'round' }: Props = $props();
+	let { children, href, onclick = () => {}, variant = 'round', provider = 'link', ...rest }: Props = $props();
 
 	let classList = $derived([
 		'btn border-2 transition-all ',
@@ -24,9 +27,15 @@
 </script>
 
 <div class="flex size-fit pb-1.5 pr-1">
-	<a {href} type="button" class={classList} bind:offsetWidth={bWidth} bind:offsetHeight={bHeight}>
-		{@render children()}
-	</a>
+	{#if provider === 'link'}
+		<a {href} type="button" class={classList} bind:offsetWidth={bWidth} bind:offsetHeight={bHeight} {...rest}>
+			{@render children()}
+		</a>
+	{:else if provider === 'button'}
+		<button type="button" class={classList} bind:offsetWidth={bWidth} bind:offsetHeight={bHeight} {onclick} {...rest}>
+			{@render children()}
+		</button>
+	{/if}
 	<div
 		style="width: {bWidth}px; height: {bHeight}px;"
 		class="btn absolute -z-10 translate-x-1 translate-y-1.5 bg-surface-950"
