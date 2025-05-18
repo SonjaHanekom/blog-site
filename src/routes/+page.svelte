@@ -1,21 +1,35 @@
-<script>
+<script lang="ts">
 	import Window from '$lib/components/ui/Window.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { Skull } from 'lucide-svelte';
+	
+	let view: HTMLDivElement | undefined = $state();
+
+	let bounds = $derived.by(() => {
+		let rect = view?.getBoundingClientRect();
+		return {
+			xmin: rect?.left|| 0,
+			xmax: rect?.right || 0,
+			ymin: rect?.top || 0,
+			ymax: rect?.bottom || 0,
+		};
+	})
+	
+	let test = $state(0);
+
+	$inspect(test)
 </script>
 
-<Window id="window-1" title="Window 1" initialPosition={{ x: 100, y: 100 }}>
+
+
+<div class="h-full" bind:this={view}>
+<Window id="window-1" title="Window 1" initialPosition={{ x: 100, y: 100 }} {bounds}>
 	<img src="https://picsum.photos/400" alt="Picsum Pic" />
 </Window>
-<Window id="window-2" title="Window 2" initialPosition={{ x: 500, y: 500 }}>
+<Window id="window-2" title="Window 2" initialPosition={{ x: 500, y: 500 }} {bounds}>
 	<img src="https://picsum.photos/200" alt="Picsum Pic" />
 </Window>
-<Window id="window-3" title="Window 3" initialPosition={{ x: 700, y: 300 }}>
+<Window id="window-3" title="Window 3" initialPosition={{ x: 700, y: 300 }} {bounds}>
 	<img src="https://picsum.photos/300/200" alt="Picsum Pic" />
 </Window>
-
-<div class="flex flex-col gap-4">
 	<Button href="/">Hi</Button>
-
-	<!-- <Button href="/ahhh">Hi<Skull />Hi</Button> -->
 </div>

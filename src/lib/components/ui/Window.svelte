@@ -6,16 +6,20 @@
 		id,
 		title,
 		children,
-		initialPosition = { x: 300, y: 500 }
+		initialPosition = { x: 300, y: 500 },
+		bounds = { xmin: 0, xmax: window.innerWidth, ymin: 0, ymax: window.innerHeight },
 	}: {
 		id: string;
 		title: string;
 		children: Snippet<[]>;
 		initialPosition: { x: number; y: number };
+		bounds: { xmin: number; xmax: number; ymin: number; ymax: number };
 	} = $props();
 
 	let dragging = $state(false);
 	let position = $state(initialPosition);
+	let width = $state(0);
+	let height = $state(0);
 	let stack = $derived.by(() => {
 		const index = windowStack.windows.findIndex((windowId) => windowId === id);
 		if (index === -1) return 0;
@@ -23,7 +27,6 @@
 	});
 
 	const onmousedown = () => {
-		console.log('start dragging');
 		dragging = true;
 		bringToFront(id);
 		window.addEventListener('mousemove', onmousemove);
@@ -34,12 +37,15 @@
 		if (!dragging) return;
 		position.x += event.movementX;
 		position.y += event.movementY;
-		console.log('dragging');
+		
+		if (position.x < bounds.xmin) position.x = bounds.xmin;
+		if (position.x + width > bounds.xmax) position.x = bounds.xmax - width;
+		if (position.y < bounds.ymin) position.y = bounds.ymin;
+		if (position.y + height > bounds.ymax) position.y = bounds.ymax - height;
 	};
 
 	const onmouseup = () => {
 		dragging = false;
-		console.debug(windowStack.stack);
 		window.removeEventListener('mousemove', onmousemove);
 		window.removeEventListener('mouseup', onmouseup);
 	};
@@ -69,6 +75,8 @@
 	style={`left: ${position.x}px; top: ${position.y}px; z-index: ${stack}`}
 	role="dialog"
 	aria-labelledby={`${id}-title`}
+	bind:clientHeight={height}
+	bind:clientWidth={width}
 >
 	<div
 		class="flex items-center gap-3 border-b px-4 py-2 border-surface-950-50"
