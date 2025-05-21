@@ -3,14 +3,14 @@
 	import Card from '$lib/components/ui/Card.svelte';
 	import Input from '$lib/components/ui/Input.svelte';
 	import Tag from '$lib/components/ui/Tag.svelte';
-	import { ALL_TAGS, type Tags } from '$lib/post.js';
+	import { ALL_TAGS, type Post, type Tags } from '$lib/post.js';
 	import { Search } from 'lucide-svelte';
 	import { flip } from 'svelte/animate';
 
 	let search = $state('');
 	let tags: Tags[] = $state([]);
 
-	let { data } = $props();
+	let { data } = $props<{ data: { posts: Post[] } }>();
 
 	const toggleTag = (enabled: boolean, tag: Tags) => {
 		if (!enabled) {
