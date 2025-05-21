@@ -5,6 +5,7 @@
 	interface Props {
 		children: Snippet;
 		href?: string;
+		isNav?: boolean;
 		onclick?: () => void;
 		variant?: 'round' | 'square';
 		provider?: 'link' | 'button';
@@ -13,6 +14,7 @@
 	let {
 		children,
 		href,
+		isNav = false,
 		onclick = () => {},
 		variant = 'round',
 		provider = 'link',
@@ -20,17 +22,22 @@
 	}: Props = $props();
 
 	let isActive = $derived(
-		href ? (href === '/' ? href === page.url.pathname : page.url.pathname.startsWith(href)) : false
+		href && isNav
+			? href === '/'
+				? href === page.url.pathname
+				: page.url.pathname.startsWith(href)
+			: false
 	);
 
 	let classList = $derived([
 		'btn border-2 transition-all z-10',
-		!isActive &&
-			'bg-surface-50 hover:translate-x-1 hover:translate-y-1.5 hover:shadow-none border-surface-950 text-surface-950',
+		!isActive && 'bg-surface-50 border-surface-950 text-surface-950',
+		!isActive && isNav && 'hover:translate-x-1 hover:translate-y-1.5 hover:shadow-none ',
 		isActive &&
 			'interactive-current translate-x-1 translate-y-1.5 border-primary-950 bg-primary-50 text-primary-950',
 		variant === 'round' && 'rounded-full',
-		variant === 'square' && 'rounded-xl'
+		variant === 'square' && 'rounded-xl',
+		rest.class
 	]);
 
 	let bWidth = $state();
@@ -41,22 +48,19 @@
 	{#if provider === 'link'}
 		<a
 			{href}
-			type="button"
-			class={classList}
 			bind:offsetWidth={bWidth}
 			bind:offsetHeight={bHeight}
-			{...rest}
+			{...{ ...rest, class: classList }}
 		>
 			{@render children()}
 		</a>
 	{:else if provider === 'button'}
 		<button
 			type="button"
-			class={classList}
 			bind:offsetWidth={bWidth}
 			bind:offsetHeight={bHeight}
 			{onclick}
-			{...rest}
+			{...{ ...rest, class: classList }}
 		>
 			{@render children()}
 		</button>

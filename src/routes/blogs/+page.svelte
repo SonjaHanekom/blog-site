@@ -49,13 +49,13 @@
 	<Input type="search" name="search" aria-label="Search" />
 	<Button provider="button" type="submit"><Search /></Button>
 </form>
-<div class="mt-4 grid grid-cols-5 gap-4">
+<div class="mt-4 grid gap-4 sm:grid-cols-2 md:grid-cols-5">
 	{#each ALL_TAGS as tag}
 		<Tag isFilter {tag} bind:toggled={() => tags.includes(tag), (v) => toggleTag(v, tag)} />
 	{/each}
 </div>
 
-<ul class="mt-8 space-y-4">
+<ul class="my-8 space-y-4">
 	{#each filteredPosts as post (post.slug)}
 		<li animate:flip={{ duration: 200 }}>
 			<Card class="h-64" href={`/blogs/${post.slug}`} img={post.image} imgAlt={post.imageAlt}>

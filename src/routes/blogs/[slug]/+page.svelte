@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/ui/Button.svelte';
 	import Tag from '$lib/components/ui/Tag.svelte';
 
 	let { data } = $props();
@@ -10,7 +11,8 @@
 	<meta property="og:title" content={data.meta.title} />
 </svelte:head>
 
-<article class="space-y-4">
+<article class="space-y-4 px-4">
+	<Button href="/blogs">Back to Blogs</Button>
 	<div class="card space-y-4 rounded-xl border border-surface-950 p-4">
 		<hgroup class="space-y-4">
 			<h1>{data.meta.title}</h1>

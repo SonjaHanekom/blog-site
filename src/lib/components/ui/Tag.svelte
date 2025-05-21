@@ -37,7 +37,7 @@
 	></div>
 {/snippet}
 {#if isFilter}
-	<label class="flex w-full pb-1.5 pr-1">
+	<label class="flex w-full pb-1.5 pr-1" title={`Filter by ${tag}`}>
 		<input type="checkbox" bind:checked={toggled} class="sr-only" aria-label={`Filter by ${tag}`} />
 		{@render content()}
 	</label>

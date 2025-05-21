@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Window from '$lib/components/ui/Window.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
 
 	let view: HTMLDivElement | undefined = $state();
 
