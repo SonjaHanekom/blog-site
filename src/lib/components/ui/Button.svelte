@@ -19,11 +19,15 @@
 		...rest
 	}: Props = $props();
 
+	let isActive = $derived(
+		href ? (href === '/' ? href === page.url.pathname : page.url.pathname.startsWith(href)) : false
+	);
+
 	let classList = $derived([
-		'btn border-2 transition-all ',
-		page.url.pathname !== href &&
+		'btn border-2 transition-all z-10',
+		!isActive &&
 			'bg-surface-50 hover:translate-x-1 hover:translate-y-1.5 hover:shadow-none border-surface-950 text-surface-950',
-		page.url.pathname === href &&
+		isActive &&
 			'interactive-current translate-x-1 translate-y-1.5 border-primary-950 bg-primary-50 text-primary-950',
 		variant === 'round' && 'rounded-full',
 		variant === 'square' && 'rounded-xl'
@@ -59,6 +63,6 @@
 	{/if}
 	<div
 		style="width: {bWidth}px; height: {bHeight}px;"
-		class="btn absolute -z-10 translate-x-1 translate-y-1.5 bg-surface-950"
+		class="btn absolute translate-x-1 translate-y-1.5 bg-surface-950"
 	></div>
 </div>

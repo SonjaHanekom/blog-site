@@ -6,6 +6,6 @@
 
 <Nav />
 
-<main class="flex-1 p-4">
+<main class="flex-1 p-8">
 	{@render children()}
 </main>

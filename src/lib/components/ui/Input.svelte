@@ -11,8 +11,8 @@
 	}: Props = $props();
 
 	let classList = $derived([
-		'btn border-2 transition-all ',
-		'bg-surface-50 hover:translate-x-1 border-surface-950 text-surface-950 focus:border-primary-500 focus:ring-primary-500',
+		'btn border-2 transition-all w-full',
+		'bg-surface-50 border-surface-950 text-surface-950 focus:border-primary-500 focus:ring-primary-500',
 		rest.class
 	]);
 
@@ -25,7 +25,7 @@
 		bind:value
 		bind:offsetWidth={width}
 		bind:offsetHeight={height}
-		{...{ rest, type: 'text', class: classList, placeholder }}
+		{...{ ...rest, type: 'text', class: classList, placeholder }}
 	/>
 	<div
 		style="width: {width}px; height: {height}px;"

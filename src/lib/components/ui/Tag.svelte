@@ -10,9 +10,11 @@
 	let { tag, toggled = $bindable(false), isFilter = false, ...rest }: Props = $props();
 
 	let classList = $derived([
-		'btn hover:filter-none border-2 transition-all z-10',
+		'btn border-2 transition-all z-10',
 		'rounded-2xl',
-		isFilter && 'interactive w-32 hover:translate-x-1 hover:translate-y-1.5 hover:shadow-none',
+		!isFilter && 'hover:filter-none',
+		isFilter && 'w-full cursor-pointer',
+		isFilter && toggled && 'interactive-current translate-x-1 translate-y-1.5',
 		tag === 'Fountain Pens' && 'bg-error-50 text-error-950 border-error-950',
 		tag === 'Design' && 'bg-warning-50 text-warning-950 border-warning-950',
 		tag === 'Lifestyle' && 'bg-success-50 text-success-950 border-success-950',
@@ -40,7 +42,7 @@
 		{@render content()}
 	</label>
 {:else}
-	<div class="flex w-full pb-1.5 pr-1">
+	<div class="flex pb-1.5 pr-1">
 		{@render content()}
 	</div>
 {/if}
