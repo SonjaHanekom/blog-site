@@ -1,4 +1,4 @@
-export type Categories = 'Fountain Pens' | 'Ink';
+export type Tags = 'Fountain Pens' | 'Coding' | 'Design' | 'Lifestyle' | 'Pets';
 
 export type Post = {
 	title: string;
@@ -6,5 +6,7 @@ export type Post = {
 	summary: string;
 	date: string;
 	tags: Tags[];
+	image: string;
+	imageAlt: string;
 	published: boolean;
 };

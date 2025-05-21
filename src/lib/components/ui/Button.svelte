@@ -8,9 +8,16 @@
 		onclick?: () => void;
 		variant?: 'round' | 'square';
 		provider?: 'link' | 'button';
-		[key: string]: any; // Allow any other props
+		[key: string]: unknown; // Allow any other props
 	}
-	let { children, href, onclick = () => {}, variant = 'round', provider = 'link', ...rest }: Props = $props();
+	let {
+		children,
+		href,
+		onclick = () => {},
+		variant = 'round',
+		provider = 'link',
+		...rest
+	}: Props = $props();
 
 	let classList = $derived([
 		'btn border-2 transition-all ',
@@ -28,11 +35,25 @@
 
 <div class="flex size-fit pb-1.5 pr-1">
 	{#if provider === 'link'}
-		<a {href} type="button" class={classList} bind:offsetWidth={bWidth} bind:offsetHeight={bHeight} {...rest}>
+		<a
+			{href}
+			type="button"
+			class={classList}
+			bind:offsetWidth={bWidth}
+			bind:offsetHeight={bHeight}
+			{...rest}
+		>
 			{@render children()}
 		</a>
 	{:else if provider === 'button'}
-		<button type="button" class={classList} bind:offsetWidth={bWidth} bind:offsetHeight={bHeight} {onclick} {...rest}>
+		<button
+			type="button"
+			class={classList}
+			bind:offsetWidth={bWidth}
+			bind:offsetHeight={bHeight}
+			{onclick}
+			{...rest}
+		>
 			{@render children()}
 		</button>
 	{/if}

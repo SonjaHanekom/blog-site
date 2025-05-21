@@ -1,11 +1,8 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
-	import { page } from '$app/state';
-
 	interface Props {
 		placeholder?: string;
 		value?: string;
-		[key: string]: any; // Allow any other props
+		[key: string]: unknown; // Allow any other props
 	}
 	let {
 		placeholder = 'Search for a blog title...',
@@ -23,7 +20,7 @@
 	let height = $state();
 </script>
 
-<div class="flex size-fit flex-1 pb-1.5 pr-1">
+<div class="flex w-full flex-1 pb-1.5 pr-1">
 	<input
 		bind:value
 		bind:offsetWidth={width}
